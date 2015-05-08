@@ -13,7 +13,7 @@ function getConnection(){
 	    host     : 'team2.cywpykpi3tp9.us-west-1.rds.amazonaws.com',
 	    user     : 'team2',
 	    password : 'wmsteam2',
-	    database : 'workforce_management' // Please Insert DB Name here
+	    database : 'Inventory_system' // Please Insert DB Name here
 	});
 	return connection;
 }
