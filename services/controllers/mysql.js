@@ -8,6 +8,8 @@ var arrayItems = {
 		'time'     : 0
 };
 
+// comment inserted here
+
 function getConnection(){
 	var connection = mysql.createConnection({
 	    host     : 'team2.cywpykpi3tp9.us-west-1.rds.amazonaws.com',
