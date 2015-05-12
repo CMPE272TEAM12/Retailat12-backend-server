@@ -78,5 +78,30 @@ cnn.on('ready', function() {
 				}
 			});
 		});
+		
+		cnn.queue('employee_queue', function(q) { // For any new queue use this code
+			// with appropriate values
+			console.log("employee_queue function");
+			q.subscribe(function(message, headers, deliveryInfo, m) {
+				console.log("employee_queue inside function");
+
+				// Logs if necessary
+				util.log(util.format(deliveryInfo.routingKey, message));
+				util.log("Message: " + JSON.stringify(message));
+				util.log("DeliveryInfo: " + JSON.stringify(deliveryInfo));
+
+				// If Using One queue for particular set of operation, using
+				// message.type to differentiate request
+				switch (message.type) {
+				case "add":
+					product.handle_add_employee(message, function(err, res) {
+						utility.publish_Reply(m, res);
+					});
+					break;
+
+				
+				}
+			});
+		});
 	});
 });

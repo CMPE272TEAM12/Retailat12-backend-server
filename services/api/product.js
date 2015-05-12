@@ -6,7 +6,7 @@ exports.handle_sold_product = handle_sold_product;
 exports.handle_get_product = handle_get_product;
 
 function handle_get_product(msg,callback){
-	var getProductQuery = "call proc_getProduct";
+	var getProductQuery = "call proc_getItems(2)";
 	
 	utility.getDataExecuteQuery(getProductQuery,callback,"No Product available");
 }

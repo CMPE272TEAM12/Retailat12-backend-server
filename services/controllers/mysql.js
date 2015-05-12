@@ -12,7 +12,7 @@ var arrayItems = {
 
 function getConnection(){
 	var connection = mysql.createConnection({
-	    host     : 'team2.cywpykpi3tp9.us-west-1.rds.amazonaws.com',
+	    host     : 'wmsteam2.cnkjhozr1cjt.us-west-1.rds.amazonaws.com',
 	    user     : 'team2',
 	    password : 'wmsteam2',
 	    database : 'Inventory_system' // Please Insert DB Name here
