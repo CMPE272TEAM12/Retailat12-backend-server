@@ -13,16 +13,16 @@ function handle_get_product(msg,callback){
 
 function handle_add_product(msg,callback){
 	
-	var addProductQuery = "call proc_addUpdateProduct";
+	var addProductQuery = "call proc_addUpdateProduct('"+msg.product_name+"',"+1+","+2+",'"+msg.product_code+"',"+msg.product_price+");";
 	
 	utility.postDataExecuteQuery(addProductQuery,callback,"Product is not added.");
 }
 
 function handle_update_product(msg,callback){
 	
-	var addProductQuery = "call proc_addUpdateProduct";
+	var updateProductQuery = "call proc_addUpdateProduct('"+msg.product_name+"',"+1+","+2+",'"+msg.product_code+"',"+msg.product_price+");";
 	
-	utility.postDataExecuteQuery(addProductQuery,callback,"Product is not updated.");
+	utility.postDataExecuteQuery(updateProductQuery,callback,"Product is not updated.");
 }
 
 function handle_sold_product(msg,callback){
