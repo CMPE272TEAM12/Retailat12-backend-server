@@ -60,7 +60,7 @@ function handle_sold_product(msg,callback){
 					}
 				}
 			},soldProductQuery);
-		}
+		
 	}
 
 	
