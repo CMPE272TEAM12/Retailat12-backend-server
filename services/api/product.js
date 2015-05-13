@@ -6,10 +6,10 @@ exports.handle_add_product = handle_add_product;
 exports.handle_update_product = handle_update_product;
 exports.handle_sold_product = handle_sold_product;
 exports.handle_get_product = handle_get_product;
-exports.handle_get_lastweekproduct = handle_get_lastweekproduct;
+exports.handle_get_product_history = handle_get_product_history;
 
-function handle_get_lastweekproduct(msg,callback){
-	var getLastWeekProductQuery = "call proc_itemsSoldLastWeek()";
+function handle_get_product_history(msg,callback){
+	var getLastWeekProductQuery = "call proc_itemsSoldLastWeek("+msg.noDays+")";
 	
 	utility.getDataExecuteQuery(getLastWeekProductQuery,callback,"No Product available");
 }

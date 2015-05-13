@@ -76,6 +76,12 @@ cnn.on('ready', function() {
 						utility.publish_Reply(m, res);
 					});
 					break;	
+					
+				case "producthistory":
+					product.handle_get_product_history(message, function(err, res) {
+						utility.publish_Reply(m, res);
+					});
+					break;
 				}
 			});
 		});
