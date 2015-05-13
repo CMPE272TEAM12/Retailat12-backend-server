@@ -4,6 +4,7 @@ var login = require('./services/api/login');
 var logout = require('./services/api/logout');
 var utility = require('./services/utility/utility');
 var product = require('./services/api/product');
+var employee = require('./services/api/employee');
 var cnn = amqp.createConnection({
 	host : '127.0.0.1'
 });
@@ -93,13 +94,35 @@ cnn.on('ready', function() {
 				// If Using One queue for particular set of operation, using
 				// message.type to differentiate request
 				switch (message.type) {
-				case "add":
-					product.handle_add_employee(message, function(err, res) {
-						utility.publish_Reply(m, res);
-					});
-					break;
-
+					case "add":
+						employee.handle_add_employee(message, function(err, res) {
+							utility.publish_Reply(m, res);
+						});
+						break;
+						
+					case "intime":
+						employee.handle_employee_intime(message, function(err, res) {
+							utility.publish_Reply(m, res);
+						});
+						break;
+						
+					case "outtime":
+						employee.handle_employee_outtime(message, function(err, res) {
+							utility.publish_Reply(m, res);
+						});
+						break;
 				
+					case "get":
+						employee.handle_get_employee(message, function(err, res) {
+							utility.publish_Reply(m, res);
+						});
+						break;
+						
+					case "instore":
+						employee.handle_employee_instore(message, function(err, res) {
+							utility.publish_Reply(m, res);
+						});
+						break;
 				}
 			});
 		});
