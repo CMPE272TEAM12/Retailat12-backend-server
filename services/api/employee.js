@@ -9,7 +9,7 @@ exports.handle_employee_instore = handle_employee_instore;
 
 function handle_get_employee(msg,callback){
 	
-	var getEmployeeQuery = "call proc_getEmployees(2)";
+	var getEmployeeQuery = "call proc_inStoreEmployee(2)";
 	
 	utility.getDataExecuteQuery(getEmployeeQuery,callback,"Employee list is not available.");
 }

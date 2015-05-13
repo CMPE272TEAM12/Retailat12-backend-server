@@ -21,10 +21,33 @@ function handle_get_product(msg,callback){
 }
 
 function handle_add_product(msg,callback){
+	console.log("Inside add");
+	var res={};
+	var object = JSON.parse(msg.itemList);
 	
-	var addProductQuery = "call proc_addUpdateProduct('"+msg.product_name+"',"+1+","+2+",'"+msg.product_code+"',"+msg.product_price+");";
+	for(var i=0;i<object.length;i++)
+	{
+		var addProductQuery = "call proc_addUpdateProduct('"+object[i].Item+"',"+object[i].Quantity+","+2+",'"+object[i].Code+"',"+object[i].Price+");";
+		console.log(addProductQuery+"\n");
+		mysql.fetchData(function(err,results){
+			if(err)
+				throw err;
+			else{
+				//console.log(object.length);
+					if(i == object.length)
+					{
+						res.code = "200";
+						res.value = "Success";
+						res.error = "none";
+						res.status = true;
+					//res.resultsData = results[0];	
+						callback(null, res);		
+					}
+				}
+			},addProductQuery);
+	}
 	
-	utility.postDataExecuteQuery(addProductQuery,callback,"Product is not added.");
+	//utility.postDataExecuteQuery(addProductQuery,callback,"Product is not added.");
 }
 
 function handle_update_product(msg,callback){
@@ -35,9 +58,10 @@ function handle_update_product(msg,callback){
 }
 
 function handle_sold_product(msg,callback){
-	console.log("Inside solde");
+	console.log("Inside sold");
 	var res={};
-	var object = msg.itemList;
+	var object = JSON.parse(msg.itemList);
+	
 	console.log(object.length);
 	
 	for(var i=0;i<object.length;i++)
@@ -59,19 +83,8 @@ function handle_sold_product(msg,callback){
 						callback(null, res);		
 					}
 				}
-			},soldProductQuery);
-		
+			},soldProductQuery);	
 	}
-
-	
-	
-//	object1.forEach(function(object){
-//		console.log(object+"----");
-//	});
-//	
-//	res.code="200";
-//	callback(null,res);
-	//utility.postDataExecuteQuery(soldProductQuery,callback,"Product sold not updated.");
 }
 
 
