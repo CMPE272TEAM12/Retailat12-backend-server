@@ -8,7 +8,7 @@ var crypto = require('crypto');
 function handle_login_request(msg, callback){	
 	var res = {};
 	var userID ;
-	var getUser = "SELECT password,user_type_id,salt,person_ssn FROM workforce_management.persons_table where person_ssn='"+msg.ssn+"';";
+	var getUser = "SELECT employeename FROM Inventory_system.employee where employeecode='"+msg.empcode+"';";
 	//console.log("Query Login Log : " + getUser);
 	
 //	var salt = crypto.randomBytes(128).toString('base64');
@@ -32,37 +32,15 @@ function handle_login_request(msg, callback){
 			} else {
 				if((results.length > 0))
 				{
-						//login = JSON.stringify(results);
-					console.log("Password : "+msg.password);	
-					crypto.pbkdf2(msg.password, results[0].salt, 10000, 64, function(err, derivedKey) {
-						if(derivedKey == results[0].password)
-						{
-							res.code = "200";
-							res.value = "Success";
-							res.error = "none";
-							res.status = true;
-							res.login = results[0];
-							console.log("valid login" + results[0]);	
-							
-							callback(null, res);
-						}
-						else
-						{
-							res.code = "401";
-							res.value = "User not Valid";
-							console.log("Invalid Login");
-							callback(null, res);
-							
-						}
-					});
-						// Values for error or Success		
-				} 
-					else {
+					res.code = "200";
+					res.value = "Success";
+					res.error = "none";
+					res.status = true;
+					//res.resultsData = results[0];
+					//console.log("valid login" + results[0]);	
 					
-					res.code = "401";
-					res.value = "User not Valid";
-					console.log("Invalid Login");
 					callback(null, res);
+			
 				}		
 			}
 		}, getUser);	
