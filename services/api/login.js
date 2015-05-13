@@ -11,19 +11,7 @@ function handle_login_request(msg, callback){
 	var getUser = "SELECT employeename FROM Inventory_system.employee where employeecode='"+msg.empcode+"';";
 	//console.log("Query Login Log : " + getUser);
 	
-//	var salt = crypto.randomBytes(128).toString('base64');
-//	console.log("Salt: "+ salt);
-	
-//	crypto.pbkdf2(msg.password, salt, 10000, 64, function(err, derivedKey) {
-//		getUserQuery = "update persons_table set password = '"+derivedKey+"' where person_ssn=111;"; 
-//	    console.log("Derived Key : "+ getUserQuery);
-//	    //next();
-//	    var newkey = derivedKey;
-//	    if(derivedKey == newkey)
-//	    {
-//	    	console.log("password success.........");
-//	    }
-//	    
+  
 	    mysql.fetchData(function(err,results){
 			if(err) {
 				res.code = "503";
