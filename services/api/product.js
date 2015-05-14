@@ -7,6 +7,16 @@ exports.handle_update_product = handle_update_product;
 exports.handle_sold_product = handle_sold_product;
 exports.handle_get_product = handle_get_product;
 exports.handle_get_product_history = handle_get_product_history;
+exports.handle_addsentiment = handle_addsentiment;
+
+function handle_addsentiment(msg,callback){
+	var object =JSON.parse(msg.itemList)
+	
+	for(var i=0;i<object.length;i++){
+		
+		
+	}
+} 
 
 function handle_get_product_history(msg,callback){
 	var getLastWeekProductQuery = "call proc_itemsSoldLastWeek("+msg.noDays+")";
@@ -27,7 +37,7 @@ function handle_add_product(msg,callback){
 	
 	for(var i=0;i<object.length;i++)
 	{
-		var addProductQuery = "call proc_addUpdateProduct('"+object[i].Item+"',"+object[i].Quantity+","+2+",'"+object[i].Code+"',"+object[i].Price+");";
+		var addProductQuery = "call proc_addUpdateProduct('"+object[i].Item+"',"+object[i].Quantity+","+2+",'"+object[i].Code+"','"+object[i].Price+"');";
 		console.log(addProductQuery+"\n");
 		mysql.fetchData(function(err,results){
 			if(err)
@@ -52,7 +62,7 @@ function handle_add_product(msg,callback){
 
 function handle_update_product(msg,callback){
 	
-	var updateProductQuery = "call proc_addUpdateProduct('"+msg.product_name+"',"+1+","+2+",'"+msg.product_code+"',"+msg.product_price+");";
+	var updateProductQuery = "call proc_addUpdateProduct('"+msg.product_name+"',"+1+","+2+",'"+msg.product_code+"','"+msg.product_price+"');";
 	
 	utility.postDataExecuteQuery(updateProductQuery,callback,"Product is not updated.");
 }
